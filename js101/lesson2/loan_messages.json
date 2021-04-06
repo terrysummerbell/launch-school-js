@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to the loan calculator",
+  "loan_amount": "Please enter a new loan amount: ",
+  "annualPercentageRate": "Please enter the Annual Percentage Rate (APR): ",
+  "loan_duration": "Please enter the loan duration, in months (e.g. 12): ",
+  "new_loan": "Would you like to calculate a new loan? y/n",
+  "thank_you": "Thank you for using the loan calculator, have a good day!",
+  "invalid_loan_input": "That's an invalid input, please enter a value for the loan amount.",
+  "invalid_apr_input": "That's an invalid input, please enter a value for the APR.",
+  "invalid_duration_input": "That's an invalid input, please enter a value for the loan duration in months."
+}
