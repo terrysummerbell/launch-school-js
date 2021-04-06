@@ -10,7 +10,7 @@ function messages(message) {
 }
 
 function invalidInput(input) {
-  return input.trimStart() === '' || Number.isNaN(Number(input));
+  return input.trimStart() === '' || Number.isNaN(Number(input)) || input <= 0;
 }
 
 prompt(messages('welcome'));
