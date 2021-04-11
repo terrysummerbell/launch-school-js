@@ -2,6 +2,7 @@
 
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard'];
+const WIN_SCORE = 5;
 
 const WINNING_MOVES = {
   rock: ['scissors', 'lizard'],
@@ -37,16 +38,19 @@ function displayWinner(playerChoice, computerChoice) {
   prompt(`Computer Score: ${computerScore}`);
 }
 
-function bestOfFive() {
-  if (playerScore === 5) {
-    prompt('You win the best of 5!');
-    playerScore = 0;
-    computerScore = 0;
-  } else if (computerScore === 5) {
-    prompt(`Computer wins best of 5!`);
-    playerScore = 0;
-    computerScore = 0;
+function hasMatchBeenWon() {
+  if (playerScore === WIN_SCORE) {
+    prompt(`You win the best of ${WIN_SCORE}!`);
+    resetScore();
+  } else if (computerScore === WIN_SCORE) {
+    prompt(`Computer wins best of ${WIN_SCORE}!`);
+    resetScore();
   }
+}
+
+function resetScore() {
+  playerScore = 0;
+  computerScore = 0;
 }
 
 let answer;
@@ -74,7 +78,7 @@ while (true) {
   let computerChoice = VALID_CHOICES[randomIndex];
 
   displayWinner(playerChoice, computerChoice);
-  bestOfFive();
+  hasMatchBeenWon();
   askToPlayAgain();
 
   if (answer !== 'y') {

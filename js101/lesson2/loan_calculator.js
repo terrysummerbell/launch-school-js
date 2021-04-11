@@ -34,6 +34,7 @@ while (true) {
 
   prompt(messages('loan_duration'));
   let loanDuration = readline.question();
+  console.log(loanDuration);
 
   while (invalidInput(loanDuration)) {
     prompt(messages('invalid_duration_input'));
@@ -52,9 +53,14 @@ while (true) {
   prompt(`Your monthly loan repayment is £${monthlyPayment}`);
 
   prompt(messages('new_loan'));
-  let newLoan = readline.question();
+  let newLoanAnswer = readline.question().toLowerCase();
 
-  if (newLoan !== 'y') {
+  while (newLoanAnswer !== 'y' && newLoanAnswer !== 'n') {
+    prompt("Invalid response, please type 'y' or 'n'.");
+    newLoanAnswer = readline.question();
+  }
+
+  if (newLoanAnswer !== 'y') {
     prompt(messages('thank_you'));
     break;
   }

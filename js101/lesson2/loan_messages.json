@@ -7,5 +7,6 @@
   "thank_you": "Thank you for using the loan calculator, have a good day!",
   "invalid_loan_input": "That's an invalid input, please enter a value for the loan amount.",
   "invalid_apr_input": "That's an invalid input, please enter a value for the APR.",
-  "invalid_duration_input": "That's an invalid input, please enter a value for the loan duration in months."
+  "invalid_duration_input": "That's an invalid input, please enter a value for the loan duration in months.",
+  "invalid_new_loan": "Invalid answer, please type 'y' or 'n'"
 }
