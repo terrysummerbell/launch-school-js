@@ -3,16 +3,20 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard'];
 
+const WINNING_MOVES = {
+  rock: ['scissors', 'lizard'],
+  paper: ['rock', 'spock'],
+  scissors: ['paper', 'lizard'],
+  spock: ['scissors', 'rock'],
+  lizard: ['spock', 'paper']
+};
+
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
 function playerWins(playerChoice, computerChoice) {
-  return (playerChoice === 'rock' && (computerChoice === 'scissors' || computerChoice === 'lizard')) ||
-         (playerChoice === 'paper' && (computerChoice === 'rock' || computerChoice === 'spock')) ||
-         (playerChoice === 'scissors' && (computerChoice === 'paper' || computerChoice === 'lizard')) ||
-         (playerChoice === 'spock' && (computerChoice === 'scissors' || computerChoice === 'rock')) ||
-         (playerChoice === 'lizard' && (computerChoice === 'spock' || computerChoice === 'paper'));
+  return WINNING_MOVES[playerChoice].includes(computerChoice);
 }
 
 let playerScore = 0;
@@ -22,23 +26,39 @@ function displayWinner(playerChoice, computerChoice) {
   prompt(`You chose ${playerChoice}, the computer chose ${computerChoice}`);
   if (playerWins(playerChoice, computerChoice)) {
     prompt('You win!');
-    playerScore++;
+    playerScore += 1;
   } else if (playerChoice === computerChoice) {
     prompt("It's a tie!");
   } else {
     prompt('Computer wins!');
-    computerScore++;
+    computerScore += 1;
   }
   prompt(`Player Score: ${playerScore}`);
   prompt(`Computer Score: ${computerScore}`);
 }
 
-function bestOfFive(playerScore, computerScore) {
+function bestOfFive() {
   if (playerScore === 5) {
     prompt('You win the best of 5!');
+    playerScore = 0;
+    computerScore = 0;
   } else if (computerScore === 5) {
-    prompt('Computer wins the best of 5!');
+    prompt(`Computer wins best of 5!`);
+    playerScore = 0;
+    computerScore = 0;
   }
+}
+
+let answer;
+function askToPlayAgain() {
+  prompt('Would you like to play again? (y/n)');
+  answer = readline.question().toLowerCase();
+
+  while (answer !== 'n' && answer !== 'y') {
+    prompt('Please enter "y" or "n".');
+    answer = readline.question().toLowerCase();
+  }
+  return answer;
 }
 
 while (true) {
@@ -54,14 +74,9 @@ while (true) {
   let computerChoice = VALID_CHOICES[randomIndex];
 
   displayWinner(playerChoice, computerChoice);
-  bestOfFive(playerScore, computerScore);
+  bestOfFive();
+  askToPlayAgain();
 
-  prompt('Would you like to play again? (y/n)');
-  let answer = readline.question().toLowerCase();
-  while (answer !== 'n' && answer !== 'y') {
-    prompt('Please enter "y" or "n".');
-    answer = readline.question().toLowerCase();
-  }
   if (answer !== 'y') {
     prompt('Thanks for playing "Rock, Paper, Scissors, Spock, Lizard". Have a good day!');
     break;
